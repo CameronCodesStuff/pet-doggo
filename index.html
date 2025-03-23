@@ -21,6 +21,7 @@
       padding: 20px;
       background-color: white;
       border-radius: 10px;
+      position: relative;
     }
 
     .penguin img {
@@ -61,13 +62,31 @@
       background-color: #00796b;
       border-radius: 10px;
     }
+
+    /* Animation for floating food emojis */
+    .food-emoji {
+      position: absolute;
+      font-size: 30px;
+      animation: floatUp 3s ease-in-out infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-200px) scale(1.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="game-container">
     <h1>SEXXY DOOGGOOOO</h1>
     <div class="penguin">
-      <img src="image.png" alt="Penguin" id="penguin-image">
+      <img src="image.png" alt="Doggo" id="penguin-image">
     </div>
     <div class="actions">
       <button id="feed">Feed Doggo</button>
@@ -92,7 +111,7 @@
       happiness += energyChange;
       if (happiness > 100) happiness = 100;
       if (happiness < 0) happiness = 0;
-      
+
       // Update the progress bar width to represent happiness
       document.getElementById('happiness-level').style.width = happiness + "%";
       
@@ -100,8 +119,35 @@
       document.getElementById('penguin-image').src = image;
     }
 
+    function spawnFoodEmojis() {
+      const foodEmojis = ['🍕', '🍔', '🍩', '🍪', '🍦'];
+      const randomFood = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+
+      // Create a new food emoji element
+      const foodEmoji = document.createElement('div');
+      foodEmoji.classList.add('food-emoji');
+      foodEmoji.textContent = randomFood;
+
+      // Set random position around the image
+      const xPosition = Math.random() * 400 + 'px'; // Random position in x-axis
+      const yPosition = Math.random() * 100 + 'px'; // Random position in y-axis
+      foodEmoji.style.left = xPosition;
+      foodEmoji.style.top = yPosition;
+
+      // Append the emoji to the game container
+      document.querySelector('.game-container').appendChild(foodEmoji);
+
+      // Remove the food emoji after animation completes
+      setTimeout(() => {
+        foodEmoji.remove();
+      }, 3000); // Duration of the animation (same as floatUp duration)
+    }
+
     document.getElementById('feed').addEventListener('click', () => {
       updateStatus("Doggo is happily eating!", 10, "image.png"); // Feed doggo increases happiness
+      for (let i = 0; i < 5; i++) { // Spawn 5 food emojis at once
+        spawnFoodEmojis();
+      }
     });
 
     document.getElementById('play').addEventListener('click', () => {
