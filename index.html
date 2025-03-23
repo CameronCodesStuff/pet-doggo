@@ -134,7 +134,7 @@
 
       setTimeout(() => {
         floatingItem.remove();
-      }, 3000); // Duration of the animation (same as floatUp duration)
+      }, 3000); 
     }
 
     document.getElementById('feed').addEventListener('click', () => {
@@ -145,11 +145,11 @@
     });
 
     document.getElementById('play').addEventListener('click', () => {
-      updateStatus("Doggo is playing and having fun!", -10, "image.png"); 
+      updateStatus("Doggo is playing and having fun!", -25, "image.png"); 
     });
 
     document.getElementById('sleep').addEventListener('click', () => {
-      updateStatus("Doggo is going to sleep now. Goodnight!", -20, "image.png"); 
+      updateStatus("Doggo is going to sleep now. Goodnight!", 20, "image.png"); 
       for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('Z');
       }
@@ -157,13 +157,13 @@
 
     document.getElementById('bath').addEventListener('click', () => {
       updateStatus("Doggo is taking a bath and feels refreshed!", 20, "image.png"); 
-      for (let i = 0; i < 5; i++) { // Spawn 5 water droplets when taking a bath
+      for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('💧');
       }
     });
 
     document.getElementById('walk').addEventListener('click', () => {
-      updateStatus("Doggo is walking and feeling great!", 15, "image.png"); 
+      updateStatus("Doggo is walking and feeling great!", 10, "image.png"); 
     });
   </script>
 </body>
