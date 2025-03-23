@@ -65,7 +65,6 @@
       background-color: #00796b;
       border-radius: 10px;
     }
-
     
     .floating-item {
       position: absolute;
@@ -83,6 +82,7 @@
         opacity: 0;
       }
     }
+
   </style>
 </head>
 <body>
@@ -117,6 +117,15 @@
       if (happiness < 0) happiness = 0;
 
       document.getElementById('happiness-level').style.width = happiness + "%";
+
+      if (happiness === 0) {
+        for (let i = 0; i < 5; i++) {
+          spawnFloatingItems('⚰️');
+        }
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+      }
     }
 
     function spawnFloatingItems(item) {
