@@ -22,9 +22,9 @@
       background-color: white;
       border-radius: 10px;
       position: relative;
-      width: 500px; /* Adjust width of the container */
-      height: 500px; /* Adjust height of the container */
-      overflow: hidden; /* Ensures food emojis don't overflow outside the container */
+      width: 500px; 
+      height: 500px; 
+      overflow: hidden; 
     }
 
     .penguin img {
@@ -120,54 +120,50 @@
 
     function spawnFloatingItems(item) {
       const container = document.querySelector('.game-container');
-      const xPosition = Math.random() * (container.offsetWidth - 50) + 'px'; // Random x position within container width
-      const yPosition = Math.random() * (container.offsetHeight - 50) + 'px'; // Random y position within container height
+      const xPosition = Math.random() * (container.offsetWidth - 50) + 'px'; 
+      const yPosition = Math.random() * (container.offsetHeight - 50) + 'px'; 
 
-      // Create a new floating item element
       const floatingItem = document.createElement('div');
       floatingItem.classList.add('floating-item');
       floatingItem.textContent = item;
 
-      // Set the random position for the floating item
       floatingItem.style.left = xPosition;
       floatingItem.style.top = yPosition;
 
-      // Append the item to the game container
       container.appendChild(floatingItem);
 
-      // Remove the floating item after animation completes
       setTimeout(() => {
         floatingItem.remove();
       }, 3000); // Duration of the animation (same as floatUp duration)
     }
 
     document.getElementById('feed').addEventListener('click', () => {
-      updateStatus("Doggo is happily eating!", 10, "image.png"); // Feed doggo increases happiness
+      updateStatus("Doggo is happily eating!", 10, "image.png"); 
       for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('🍕');
       }
     });
 
     document.getElementById('play').addEventListener('click', () => {
-      updateStatus("Doggo is playing and having fun!", -10, "playing.png"); 
+      updateStatus("Doggo is playing and having fun!", -10, "image.png"); 
     });
 
     document.getElementById('sleep').addEventListener('click', () => {
-      updateStatus("Doggo is going to sleep now. Goodnight!", -20, "sleeping.png"); 
+      updateStatus("Doggo is going to sleep now. Goodnight!", -20, "image.png"); 
       for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('Z');
       }
     });
 
     document.getElementById('bath').addEventListener('click', () => {
-      updateStatus("Doggo is taking a bath and feels refreshed!", 20, "bathed.png"); // Bath increases happiness
+      updateStatus("Doggo is taking a bath and feels refreshed!", 20, "image.png"); 
       for (let i = 0; i < 5; i++) { // Spawn 5 water droplets when taking a bath
         spawnFloatingItems('💧');
       }
     });
 
     document.getElementById('walk').addEventListener('click', () => {
-      updateStatus("Doggo is walking and feeling great!", 15, "walking.png"); 
+      updateStatus("Doggo is walking and feeling great!", 15, "image.png"); 
     });
   </script>
 </body>
