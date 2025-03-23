@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengu Care Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e0f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .game-container {
+      text-align: center;
+      border: 3px solid #00796b;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+    }
+
+    .penguin img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .actions button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .actions button:hover {
+      background-color: #004d40;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Pengu Care</h1>
+    <div class="penguin">
+      <img src="image.png" alt="Penguin" id="penguin-image">
+    </div>
+    <div class="actions">
+      <button id="feed">Feed Penguin</button>
+      <button id="play">Play with Penguin</button>
+      <button id="sleep">Put Penguin to Sleep</button>
+    </div>
+    <div id="status">
+      <p id="status-message">Welcome to Pengu Care! How will you take care of your penguin today?</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('feed').addEventListener('click', () => {
+      document.getElementById('status-message').textContent = "Penguin is happily eating!";
+    });
+
+    document.getElementById('play').addEventListener('click', () => {
+      document.getElementById('status-message').textContent = "Penguin is playing and having fun!";
+    });
+
+    document.getElementById('sleep').addEventListener('click', () => {
+      document.getElementById('status-message').textContent = "Penguin is going to sleep now. Goodnight!";
+    });
+  </script>
+</body>
+</html>
