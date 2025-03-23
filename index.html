@@ -22,6 +22,9 @@
       background-color: white;
       border-radius: 10px;
       position: relative;
+      width: 500px; /* Adjust width of the container */
+      height: 500px; /* Adjust height of the container */
+      overflow: hidden; /* Ensures food emojis don't overflow outside the container */
     }
 
     .penguin img {
@@ -63,8 +66,8 @@
       border-radius: 10px;
     }
 
-    /* Animation for floating food emojis */
-    .food-emoji {
+    /* Animation for floating items */
+    .floating-item {
       position: absolute;
       font-size: 30px;
       animation: floatUp 3s ease-in-out infinite;
@@ -114,39 +117,35 @@
 
       // Update the progress bar width to represent happiness
       document.getElementById('happiness-level').style.width = happiness + "%";
-      
-      // Update the pet's image based on its current activity
-      document.getElementById('penguin-image').src = image;
     }
 
-    function spawnFoodEmojis() {
-      const foodEmojis = ['🍕', '🍔', '🍩', '🍪', '🍦'];
-      const randomFood = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+    function spawnFloatingItems(item) {
+      const container = document.querySelector('.game-container');
+      const xPosition = Math.random() * (container.offsetWidth - 50) + 'px'; // Random x position within container width
+      const yPosition = Math.random() * (container.offsetHeight - 50) + 'px'; // Random y position within container height
 
-      // Create a new food emoji element
-      const foodEmoji = document.createElement('div');
-      foodEmoji.classList.add('food-emoji');
-      foodEmoji.textContent = randomFood;
+      // Create a new floating item element
+      const floatingItem = document.createElement('div');
+      floatingItem.classList.add('floating-item');
+      floatingItem.textContent = item;
 
-      // Set random position around the image
-      const xPosition = Math.random() * 400 + 'px'; // Random position in x-axis
-      const yPosition = Math.random() * 100 + 'px'; // Random position in y-axis
-      foodEmoji.style.left = xPosition;
-      foodEmoji.style.top = yPosition;
+      // Set the random position for the floating item
+      floatingItem.style.left = xPosition;
+      floatingItem.style.top = yPosition;
 
-      // Append the emoji to the game container
-      document.querySelector('.game-container').appendChild(foodEmoji);
+      // Append the item to the game container
+      container.appendChild(floatingItem);
 
-      // Remove the food emoji after animation completes
+      // Remove the floating item after animation completes
       setTimeout(() => {
-        foodEmoji.remove();
+        floatingItem.remove();
       }, 3000); // Duration of the animation (same as floatUp duration)
     }
 
     document.getElementById('feed').addEventListener('click', () => {
       updateStatus("Doggo is happily eating!", 10, "image.png"); // Feed doggo increases happiness
       for (let i = 0; i < 5; i++) { // Spawn 5 food emojis at once
-        spawnFoodEmojis();
+        spawnFloatingItems('🍕');
       }
     });
 
@@ -156,10 +155,16 @@
 
     document.getElementById('sleep').addEventListener('click', () => {
       updateStatus("Doggo is going to sleep now. Goodnight!", -20, "sleeping.png"); // Sleeping decreases energy
+      for (let i = 0; i < 5; i++) { // Spawn 5 "Z"s floating when sleeping
+        spawnFloatingItems('Z');
+      }
     });
 
     document.getElementById('bath').addEventListener('click', () => {
       updateStatus("Doggo is taking a bath and feels refreshed!", 20, "bathed.png"); // Bath increases happiness
+      for (let i = 0; i < 5; i++) { // Spawn 5 water droplets when taking a bath
+        spawnFloatingItems('💧');
+      }
     });
 
     document.getElementById('walk').addEventListener('click', () => {
