@@ -46,6 +46,21 @@
       margin-top: 20px;
       font-size: 1.2em;
     }
+
+    #happiness-bar {
+      width: 100%;
+      height: 20px;
+      background-color: #e0e0e0;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+
+    #happiness-level {
+      height: 100%;
+      width: 100%; /* Start at full energy */
+      background-color: #00796b;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
@@ -58,23 +73,51 @@
       <button id="feed">Feed Doggo</button>
       <button id="play">Play with Doggo</button>
       <button id="sleep">Put Doggo to Sleep</button>
+      <button id="bath">Give Doggo a Bath</button>
+      <button id="walk">Walk Doggo</button>
     </div>
     <div id="status">
       <p id="status-message">Welcome to Doggo Care! How will you take care of your sexxxyyy Doggo today?</p>
     </div>
+    <div id="happiness-bar">
+      <div id="happiness-level"></div>
+    </div>
   </div>
 
   <script>
+    let happiness = 100;
+
+    function updateStatus(message, energyChange, image) {
+      document.getElementById('status-message').textContent = message;
+      happiness += energyChange;
+      if (happiness > 100) happiness = 100;
+      if (happiness < 0) happiness = 0;
+      
+      // Update the progress bar width to represent happiness
+      document.getElementById('happiness-level').style.width = happiness + "%";
+      
+      // Update the pet's image based on its current activity
+      document.getElementById('penguin-image').src = image;
+    }
+
     document.getElementById('feed').addEventListener('click', () => {
-      document.getElementById('status-message').textContent = "Doggo is happily eating!";
+      updateStatus("Doggo is happily eating!", 10, "image.png"); // Feed doggo increases happiness
     });
 
     document.getElementById('play').addEventListener('click', () => {
-      document.getElementById('status-message').textContent = "Doggo is playing and having fun!";
+      updateStatus("Doggo is playing and having fun!", -10, "playing.png"); // Playing decreases happiness
     });
 
     document.getElementById('sleep').addEventListener('click', () => {
-      document.getElementById('status-message').textContent = "Doggo is going to sleep now. Goodnight!";
+      updateStatus("Doggo is going to sleep now. Goodnight!", -20, "sleeping.png"); // Sleeping decreases energy
+    });
+
+    document.getElementById('bath').addEventListener('click', () => {
+      updateStatus("Doggo is taking a bath and feels refreshed!", 20, "bathed.png"); // Bath increases happiness
+    });
+
+    document.getElementById('walk').addEventListener('click', () => {
+      updateStatus("Doggo is walking and feeling great!", 15, "walking.png"); // Walking increases happiness
     });
   </script>
 </body>
