@@ -61,12 +61,12 @@
 
     #happiness-level {
       height: 100%;
-      width: 100%; /* Start at full energy */
+      width: 100%; 
       background-color: #00796b;
       border-radius: 10px;
     }
 
-    /* Animation for floating items */
+    
     .floating-item {
       position: absolute;
       font-size: 30px;
@@ -115,7 +115,6 @@
       if (happiness > 100) happiness = 100;
       if (happiness < 0) happiness = 0;
 
-      // Update the progress bar width to represent happiness
       document.getElementById('happiness-level').style.width = happiness + "%";
     }
 
@@ -144,18 +143,18 @@
 
     document.getElementById('feed').addEventListener('click', () => {
       updateStatus("Doggo is happily eating!", 10, "image.png"); // Feed doggo increases happiness
-      for (let i = 0; i < 5; i++) { // Spawn 5 food emojis at once
+      for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('🍕');
       }
     });
 
     document.getElementById('play').addEventListener('click', () => {
-      updateStatus("Doggo is playing and having fun!", -10, "playing.png"); // Playing decreases happiness
+      updateStatus("Doggo is playing and having fun!", -10, "playing.png"); 
     });
 
     document.getElementById('sleep').addEventListener('click', () => {
-      updateStatus("Doggo is going to sleep now. Goodnight!", -20, "sleeping.png"); // Sleeping decreases energy
-      for (let i = 0; i < 5; i++) { // Spawn 5 "Z"s floating when sleeping
+      updateStatus("Doggo is going to sleep now. Goodnight!", -20, "sleeping.png"); 
+      for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('Z');
       }
     });
@@ -168,7 +167,7 @@
     });
 
     document.getElementById('walk').addEventListener('click', () => {
-      updateStatus("Doggo is walking and feeling great!", 15, "walking.png"); // Walking increases happiness
+      updateStatus("Doggo is walking and feeling great!", 15, "walking.png"); 
     });
   </script>
 </body>
