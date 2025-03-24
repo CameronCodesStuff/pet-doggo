@@ -86,7 +86,6 @@
       }
     }
 
-    /* Animated Ripple Effect Background */
     @keyframes rippleEffect {
       0% {
         background-position: 0 0;
@@ -223,7 +222,7 @@
 
     document.getElementById('walk').addEventListener('click', () => {
       if (checkHappinessAndPreventActions()) return;
-      updateStatus("Doggo is walking and feeling great!", 10);
+      updateStatus("Doggo is walking and feeling great! but Doggo is hungry now.", -15);
     });
 
     document.getElementById('change-pet').addEventListener('click', () => {
