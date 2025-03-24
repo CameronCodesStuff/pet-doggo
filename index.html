@@ -82,7 +82,6 @@
         opacity: 0;
       }
     }
-
   </style>
 </head>
 <body>
@@ -90,7 +89,7 @@
     <h1>SEXXY DOOGGOOOO</h1>
     <h10>CameronCodesStuff</h10>
     <div class="penguin">
-      <img src="image.png" alt="Doggo" id="penguin-image">
+      <img src="image1.png" alt="Doggo" id="penguin-image">
     </div>
     <div class="actions">
       <button id="feed">Feed Doggo</button>
@@ -98,6 +97,7 @@
       <button id="sleep">Put Doggo to Sleep</button>
       <button id="bath">Give Doggo a Bath</button>
       <button id="walk">Walk Doggo</button>
+      <button id="change-pet">Change Pet</button>
     </div>
     <div id="status">
       <p id="status-message">Welcome to Doggo Care! How will you take care of your sexxxyyy Doggo today?</p>
@@ -109,23 +109,15 @@
 
   <script>
     let happiness = 100;
+    let petIndex = 0;
+    const petImages = ["image1.png", "image2.png", "image3.png", "image4.png", "image5.png"];
 
-    function updateStatus(message, energyChange, image) {
+    function updateStatus(message, energyChange) {
       document.getElementById('status-message').textContent = message;
       happiness += energyChange;
       if (happiness > 100) happiness = 100;
       if (happiness < 0) happiness = 0;
-
       document.getElementById('happiness-level').style.width = happiness + "%";
-
-      if (happiness === 0) {
-        for (let i = 0; i < 5; i++) {
-          spawnFloatingItems('⚰️');
-        }
-        setTimeout(() => {
-          location.reload();
-        }, 1000);
-      }
     }
 
     function spawnFloatingItems(item) {
@@ -148,32 +140,37 @@
     }
 
     document.getElementById('feed').addEventListener('click', () => {
-      updateStatus("Doggo is happily eating!", 10, "image.png"); 
+      updateStatus("Doggo is happily eating!", 10);
       for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('🍕');
       }
     });
 
     document.getElementById('play').addEventListener('click', () => {
-      updateStatus("Doggo is playing and having fun!", -25, "image.png"); 
+      updateStatus("Doggo is playing and having fun!", -25);
     });
 
     document.getElementById('sleep').addEventListener('click', () => {
-      updateStatus("Doggo is going to sleep now. Goodnight!", 20, "image.png"); 
+      updateStatus("Doggo is going to sleep now. Goodnight!", 20);
       for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('Z');
       }
     });
 
     document.getElementById('bath').addEventListener('click', () => {
-      updateStatus("Doggo is taking a bath and feels refreshed!", 20, "image.png"); 
+      updateStatus("Doggo is taking a bath and feels refreshed!", 20);
       for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('💧');
       }
     });
 
     document.getElementById('walk').addEventListener('click', () => {
-      updateStatus("Doggo is walking and feeling great!", 10, "image.png"); 
+      updateStatus("Doggo is walking and feeling great!", 10);
+    });
+
+    document.getElementById('change-pet').addEventListener('click', () => {
+      petIndex = (petIndex + 1) % petImages.length;
+      document.getElementById('penguin-image').src = petImages[petIndex];
     });
   </script>
 </body>
