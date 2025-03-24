@@ -13,6 +13,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
+      overflow: hidden;
     }
 
     .game-container {
@@ -25,6 +26,7 @@
       width: 500px; 
       height: 500px; 
       overflow: hidden; 
+      z-index: 1;
     }
 
     .penguin img {
@@ -40,6 +42,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      z-index: 2;
     }
 
     .actions button:hover {
@@ -82,9 +85,38 @@
         opacity: 0;
       }
     }
+
+    /* Animated Ripple Effect Background */
+    @keyframes rippleEffect {
+      0% {
+        background-position: 0 0;
+        background-size: 200% 200%;
+      }
+      50% {
+        background-position: 50% 50%;
+        background-size: 300% 300%;
+      }
+      100% {
+        background-position: 0 0;
+        background-size: 200% 200%;
+      }
+    }
+
+    .background-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(0, 121, 107, 1) 0%, rgba(0, 77, 64, 1) 100%);
+      background-size: 200% 200%;
+      animation: rippleEffect 5s ease-in-out infinite;
+      z-index: 0;
+    }
   </style>
 </head>
 <body>
+  <div class="background-pattern"></div>
   <div class="game-container">
     <h1>DOOGGOOOO</h1>
     <h10>CameronCodesStuff</h10>
@@ -139,18 +171,42 @@
       }, 3000); 
     }
 
+    function checkHappinessAndPreventActions() {
+      if (happiness <= 0) {
+        document.getElementById('status-message').textContent = "Doggo is too hungry! Feed the Doggo first!";
+        document.getElementById('feed').disabled = false; 
+        document.getElementById('play').disabled = true;
+        document.getElementById('sleep').disabled = true;
+        document.getElementById('bath').disabled = true;
+        document.getElementById('walk').disabled = true;
+        document.getElementById('change-pet').disabled = true;
+        return true;
+      } else {
+        document.getElementById('feed').disabled = false;
+        document.getElementById('play').disabled = false;
+        document.getElementById('sleep').disabled = false;
+        document.getElementById('bath').disabled = false;
+        document.getElementById('walk').disabled = false;
+        document.getElementById('change-pet').disabled = false;
+        return false;
+      }
+    }
+
     document.getElementById('feed').addEventListener('click', () => {
       updateStatus("Doggo is happily eating!", 10);
       for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('🍕');
       }
+      checkHappinessAndPreventActions();
     });
 
     document.getElementById('play').addEventListener('click', () => {
+      if (checkHappinessAndPreventActions()) return;
       updateStatus("Doggo is playing and having fun!", -25);
     });
 
     document.getElementById('sleep').addEventListener('click', () => {
+      if (checkHappinessAndPreventActions()) return;
       updateStatus("Doggo is going to sleep now. Goodnight!", 20);
       for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('Z');
@@ -158,6 +214,7 @@
     });
 
     document.getElementById('bath').addEventListener('click', () => {
+      if (checkHappinessAndPreventActions()) return;
       updateStatus("Doggo is taking a bath and feels refreshed!", 20);
       for (let i = 0; i < 5; i++) { 
         spawnFloatingItems('💧');
@@ -165,6 +222,7 @@
     });
 
     document.getElementById('walk').addEventListener('click', () => {
+      if (checkHappinessAndPreventActions()) return;
       updateStatus("Doggo is walking and feeling great!", 10);
     });
 
@@ -172,6 +230,8 @@
       petIndex = (petIndex + 1) % petImages.length;
       document.getElementById('penguin-image').src = petImages[petIndex];
     });
+
+    checkHappinessAndPreventActions();
   </script>
 </body>
 </html>
